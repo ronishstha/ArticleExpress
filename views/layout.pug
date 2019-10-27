@@ -2,9 +2,22 @@ doctype html
 html
     head
         title Articles
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
     body
-        block content
-        br
-        hr
-        footer
-            p Copyright &copy; 2019
+        .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
+            h5.my-0.mr-md-auto.font-weight-normal
+                a.navbar-brand(href='/') Articles
+            nav.my-2.my-md-0.mr-md-3
+                a.p-2.text-dark(href='/') Home
+            a.btn.btn-outline-primary(href='/article/add') Add Article
+        .container
+            block content
+            br
+            hr
+            footer
+                p Copyright &copy; 2019
+        script(src='/bower_components/jquery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+
+
+

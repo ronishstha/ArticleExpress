@@ -1,16 +1,27 @@
 extends layout
 
 block content
-    h1 #{title}
+    .offset-sm-1
+        h2 #{title}
+    hr
+    br
     form(method='POST', action='/article/add')
-        .form-group
-            label Title:
-            input.form-control(name='title', type='text', autofocus)
-        .form-group
-            label Author:
-            input.form-control(name='author', type='text')
-        .form-group
-            label Body:
-            textarea.form-control(name='body')
-        input.btn.btn-primary(type='submit', value='Submit')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Title
+            .col-sm-9
+                input.form-control(name='title', type='text', autofocus, placeholder='Title')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Author
+            .col-sm-9
+                input.form-control(name='author', type='text', placeholder='Author')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Body
+            .col-sm-9
+                textarea.form-control(name='body', placeholder='Body')
+        .col-sm-11
+            input.btn.btn-primary.float-right(type='submit', value='Submit')
+        br
 

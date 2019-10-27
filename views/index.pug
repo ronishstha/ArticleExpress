@@ -2,9 +2,8 @@ extends layout
 
 block content
     h1 #{title}
-    ul
+    ul.list-group
         each article, i in articles
-            li= article.title +  ' | Author: ' + article.author
-            p= article.body
-            hr
+            li.list-group-item
+                a(href="/article/" + article._id)= article.title
 

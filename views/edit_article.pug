@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    .offset-sm-1
+        h2 #{title}
+    hr
+    br
+    form(method='POST', action='/article/edit/' + article._id)
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Title
+            .col-sm-9
+                input.form-control(name='title', type='text', autofocus, placeholder='Title', value=article.title)
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Author
+            .col-sm-9
+                input.form-control(name='author', type='text', placeholder='Author', value=article.author)
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Body
+            .col-sm-9
+                textarea.form-control(name='body', placeholder='Body')= article.body
+        .col-sm-11
+            input.btn.btn-primary.float-right(type='submit', value='Submit')
+        br
+
