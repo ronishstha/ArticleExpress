@@ -12,6 +12,7 @@ html
                 a.p-2.text-dark(href='/') Home
             a.btn.btn-outline-primary(href='/article/add') Add Article
         .container
+            != messages('message', locals)
             block content
             br
             hr
