@@ -10,7 +10,9 @@ html
                 a.navbar-brand(href='/') Articles
             nav.my-2.my-md-0.mr-md-3
                 a.p-2.text-dark(href='/') Home
-            a.btn.btn-outline-primary(href='/article/add') Add Article
+                a.p-2.text-dark(href='/add/article') Add Article
+            a.btn.btn-outline-primary.m-sm-1(href='/user/register') Register
+            a.btn.btn-outline-primary(href='/user/login') Login
         .container
             != messages('message', locals)
             if errors

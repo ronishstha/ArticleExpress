@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    .offset-sm-1
+        h2 Login User
+    hr
+    br
+    form(method='POST', action='/user/login')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Email
+            .col-sm-9
+                input.form-control(name='email', type='text', placeholder='Email')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Password
+            .col-sm-9
+                input.form-control(name='password', type='password', placeholder='Password')
+        .col-sm-11
+            input.btn.btn-primary.float-right(type='submit', value='Register')
+        br
+

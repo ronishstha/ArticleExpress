@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    .offset-sm-1
+        h2 Register User
+    hr
+    br
+    form(method='POST', action='/user/register')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Name
+            .col-sm-9
+                input.form-control(name='name', type='text', autofocus, placeholder='Name')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Email
+            .col-sm-9
+                input.form-control(name='email', type='text', placeholder='Email')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Username
+            .col-sm-9
+                input.form-control(name='username', type='text', placeholder='Username')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Password
+            .col-sm-9
+                input.form-control(name='password', type='password', placeholder='Password')
+        .form-group.row
+            .col-sm-1.offset-sm-1
+                label Confirm
+            .col-sm-9
+                input.form-control(name='confirm_password', type='password', placeholder='Confirm Password')
+        .col-sm-11
+            input.btn.btn-primary.float-right(type='submit', value='Register')
+        br
+
