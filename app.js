@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const expressValidator = require('express-validator' );
+const expressValidator = require('express-validator');
 const session = require('express-session');
 const flash = require('connect-flash');
 
@@ -55,18 +55,18 @@ app.use(function (req, res, next) {
 
 // Express Validator Middleware
 app.use(expressValidator({
-    errorFormatter: function(param, msg, value) {
+    errorFormatter: function (param, msg, value) {
         var namespace = param.split('.')
-        , root   = namespace.shift()
-        , formParam = root;
+            , root = namespace.shift()
+            , formParam = root;
 
-        while(namespace.length) {
+        while (namespace.length) {
             formParam += '[' + namespace.shift() + ']';
         }
         return {
-            param   : formParam,
-            msg     : msg,
-            value   : value
+            param: formParam,
+            msg: msg,
+            value: value
         }
     }
 }));
@@ -95,20 +95,34 @@ app.get('/article/add', (req, res) => {
 
 // Add Submit POST route
 app.post('/article/add', (req, res) => {
-    let article = new Article();
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('author', 'Author is required').notEmpty();
+    req.checkBody('body', 'Body is requird').notEmpty();
 
-    article.save(err => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            req.flash('success', 'Articles Added');
-            res.redirect('/');
-        }
-    });
+    // Get Errors
+    let errors = req.validationErrors();
+
+    if (errors) {
+        res.render('add_article', {
+            title: 'Add Article',
+            errors: errors
+        })
+    } else {
+        let article = new Article();
+        article.title = req.body.title;
+        article.author = req.body.author;
+        article.body = req.body.body;
+
+        article.save(err => {
+            if (err) {
+                console.log(err);
+                return;
+            } else {
+                req.flash('success', 'Articles Added');
+                res.redirect('/');
+            }
+        });
+    }
 });
 
 // Get Single Article
@@ -132,34 +146,51 @@ app.get('/article/edit/:id', (req, res) => {
 
 // Update Submit Post Route
 app.post('/article/edit/:id', (req, res) => {
-    let article = {};
-    article.title = req.body.title;
-    article.author = req.body.author;
-    article.body = req.body.body;
+    req.checkBody('title', 'Title is required').notEmpty();
+    req.checkBody('author', 'Author is required').notEmpty();
+    req.checkBody('body', 'Body is requird').notEmpty();
 
-    let query = {_id: req.params.id};
+    // Get Errors
+    let errors = req.validationErrors();
 
-    Article.update(query, article, err => {
-        if (err) {
-            console.log(err);
-            return;
-        } else {
-            req.flash('success', 'Article Updated');
-            res.redirect('/');
-        }
-    });
+    if (errors) {
+        Article.findById(req.params.id, (err, article) => {
+            res.render('edit_article', {
+                title: 'Edit Article',
+                article: article,
+                errors: errors
+            });
+        });
+    } else {
+        let article = {};
+        article.title = req.body.title;
+        article.author = req.body.author;
+        article.body = req.body.body;
+
+        let query = {_id: req.params.id};
+
+        Article.update(query, article, err => {
+            if (err) {
+                console.log(err);
+                return;
+            } else {
+                req.flash('success', 'Article Updated');
+                res.redirect('/');
+            }
+        });
+    }
 });
 
 // Delete Article
 app.delete('/article/:id', (req, res) => {
-   let query = {_id:req.params.id};
+    let query = {_id: req.params.id};
 
-   Article.remove(query, err => {
-       if (err) {
-           console.log(err);
-       }
-       res.send('Success');
-   });
+    Article.remove(query, err => {
+        if (err) {
+            console.log(err);
+        }
+        res.send('Success');
+    });
 });
 
 // Start Server

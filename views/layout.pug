@@ -13,6 +13,11 @@ html
             a.btn.btn-outline-primary(href='/article/add') Add Article
         .container
             != messages('message', locals)
+            if errors
+                .col-sm-10.offset-sm-1
+                    .alert.alert-danger
+                        each error, i in errors
+                            p #{error.msg}
             block content
             br
             hr
