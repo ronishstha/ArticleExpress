@@ -3,7 +3,11 @@ extends layout
 block content
     h1 #{title}
     ul.list-group
-        each article, i in articles
+        if (articles.length == 0)
             li.list-group-item
-                a(href="/article/" + article._id)= article.title
+                p No Article Available
+        else
+            each article, i in articles
+                li.list-group-item
+                    a(href="/article/" + article._id)= article.title
 

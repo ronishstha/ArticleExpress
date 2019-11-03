@@ -10,8 +10,8 @@ html
                 a.navbar-brand(href='/') Articles
             nav.my-2.my-md-0.mr-md-3
                 a.p-2.text-dark(href='/') Home
-                a.p-2.text-dark(href='/add/article') Add Article
             if user
+                a.p-2.text-dark(href='/article/add') Add Article
                 a.btn.btn-outline-primary.m-sm-1(href='/user/logout') #{user.username} | Logout
             else
                 a.btn.btn-outline-primary.m-sm-1(href='/user/register') Register
